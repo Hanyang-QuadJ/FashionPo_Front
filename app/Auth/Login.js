@@ -39,64 +39,15 @@ export default class Login extends Component {
 
 
 
-
-
-
-
-
-    storeToken(responseData){
-        AsyncStorage.setItem("token", responseData, (err)=> {
-            if(err){
-                console.log("an error");
-                throw err;
-            }
-            console.log("success");
-        })
-            .then(this.props.navigation.navigate('Vote'))
-            .catch((err)=> {
-                console.log("error is: " + err);
-            });
+    navigateToRegister = ( user ) => {
+        this.props.navigation.navigate('Register',user)
     }
 
 
 
 
 
-    async onLoginPressed() {
-        this.setState({showProgress: true})
-        try {
-            let response = await fetch('http://54.162.160.91/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    session:{
-                        email: this.state.email,
-                        password: this.state.password,
-                    }
-                })
-            });
-            let res = await response.text();
-            if (response.status >= 200 && response.status < 300) {
-                //Handle success
-                let accessToken = res;
-                console.log(accessToken);
-                //On success we will store the access_token in the AsyncStorage
-                this.storeToken(accessToken);
 
-            } else {
-                //Handle error
-                let error = res;
-                throw error;
-            }
-        } catch(error) {
-            this.setState({error: error});
-            console.log("error " + error);
-            this.setState({showProgress: false});
-        }
-    }
 
     navigateToRegister(){
         this.props.navigation.navigate("Register");

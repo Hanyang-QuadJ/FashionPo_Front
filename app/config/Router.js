@@ -25,6 +25,12 @@ export const AuthStack = StackNavigator({
     },
 });
 
+export const MainTabs = TabNavigator({
+    Vote:{
+        
+    }
+})
+
 
 
 
