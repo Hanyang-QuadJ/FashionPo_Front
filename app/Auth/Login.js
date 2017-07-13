@@ -94,31 +94,7 @@ export default class Login extends Component {
 
 
 
-    // _userLogin = () => {
-    //     if (true) {
-    //         return fetch("http://54.162.160.91/api/auth/login", {
-    //             method: "POST",
-    //             headers : {
-    //                 'Content-Type': 'application/json',
-    //                 'Accept': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 email: this.state.email,
-    //                 password: this.state.password
-    //             })
-    //         })
-    //             .then((response) => response.json())
-    //
-    //             .then((responseJson) => {
-    //
-    //                 this.storeToken(responseJson.token);
-    //
-    //             })
-    //             .catch((error) => {
-    //                 console.error("Julian: " + error);
-    //             });
-    //     }
-    // };
+
 
 
 
