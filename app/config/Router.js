@@ -13,7 +13,6 @@ import Profile from '../MainScreens/Profile'
 
 
 
-
 export const MainTab = TabNavigator({
     Vote: {
         screen : Vote

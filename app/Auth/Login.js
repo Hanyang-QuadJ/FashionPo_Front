@@ -56,7 +56,7 @@ export default class Login extends Component {
             });
     }
 
-    async onLoginPressed() {
+    async onLoginPressed  () {
         this.setState({showProgress: true})
         try {
             let response = await fetch('http://54.162.160.91/api/auth/login', {
@@ -91,6 +91,36 @@ export default class Login extends Component {
             this.setState({showProgress: false});
         }
     }
+
+
+
+    // _userLogin = () => {
+    //     if (true) {
+    //         return fetch("http://54.162.160.91/api/auth/login", {
+    //             method: "POST",
+    //             headers : {
+    //                 'Content-Type': 'application/json',
+    //                 'Accept': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 email: this.state.email,
+    //                 password: this.state.password
+    //             })
+    //         })
+    //             .then((response) => response.json())
+    //
+    //             .then((responseJson) => {
+    //
+    //                 this.storeToken(responseJson.token);
+    //
+    //             })
+    //             .catch((error) => {
+    //                 console.error("Julian: " + error);
+    //             });
+    //     }
+    // };
+
+
 
 
     render() {
@@ -128,6 +158,7 @@ export default class Login extends Component {
                                value={ this.state.password }
                                secureTextEntry={ true }
                                autoCorrect={ false }
+                               returnKeyType='next'
                                />
                     <View style={styles.hairline}/>
 
@@ -136,7 +167,6 @@ export default class Login extends Component {
                     onPress={() => this.onLoginPressed()}
                     containerStyle={{padding:20, overflow:'hidden', borderRadius:5, backgroundColor: '#FFC305', marginLeft:25, marginRight:25,}}
                     style={{fontSize: 15, color: 'black', fontWeight:'100', letterSpacing:3 }}>
-
                     SIGN IN
                 </Button>
 
