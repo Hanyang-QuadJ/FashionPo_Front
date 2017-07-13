@@ -9,27 +9,28 @@ import Register from '../Auth/Register'
 import Rank from '../MainScreens/Rank'
 import Upload from '../MainScreens/UpLoad'
 import Profile from '../MainScreens/Profile'
+import TabView from '../config/TabView'
 
 
 
 
-export const MainTab = TabNavigator({
-    Vote: {
-        screen : Vote
-    },
-    Profile:{
-        screen : Profile
-    },
-    UpLoad:{
-        screen: Upload
-    },
-    Rank:{
-        screen: Rank
-    }
-
-
-
-})
+// export const MainTab = TabNavigator({
+//     Vote: {
+//         screen : Vote
+//     },
+//     Profile:{
+//         screen : Profile
+//     },
+//     UpLoad:{
+//         screen: Upload
+//     },
+//     Rank:{
+//         screen: Rank
+//     }
+//
+//
+//
+// })
 
 export const AuthStack = StackNavigator({
 
@@ -48,8 +49,8 @@ export const AuthStack = StackNavigator({
         }
 
     },
-    MainTab: {
-        screen: MainTab,
+    TabView: {
+        screen: TabView,
         navigationOptions:{
             header: null,
 

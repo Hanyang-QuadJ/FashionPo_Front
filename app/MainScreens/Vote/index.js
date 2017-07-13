@@ -15,6 +15,7 @@ import {
 
 
 } from 'react-native'
+import Button from "react-native-button";
 
 
 
@@ -54,7 +55,9 @@ export default class index extends Component{
 
 
 
+
     render(){
+
 
 
         return(
@@ -67,6 +70,7 @@ export default class index extends Component{
 
 
             </View>
+
 
 
 
