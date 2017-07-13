@@ -1,10 +1,11 @@
 
 import React, { Component } from 'react';
-import { AuthStack } from './config/Router';
+import { Root } from './config/Router';
+
 
 class App extends Component {
     render() {
-        return <AuthStack />;
+        return <Root />;
     }
 }
 

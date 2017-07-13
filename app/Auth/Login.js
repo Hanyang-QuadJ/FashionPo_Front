@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Button from 'react-native-button';
 
 
+
 import {
     Text,
     TextInput,
@@ -11,14 +12,11 @@ import {
     StyleSheet,
     KeyboardAvoidingView,
     StatusBar,
-    AsyncStorage
+    AsyncStorage,
+
 } from 'react-native';
 
 
-import main from '../index'
-
-
-const ACCESS_TOKEN = 'access_token';
 
 
 
@@ -29,28 +27,69 @@ export default class Login extends Component {
         this.state = {
             email: null,
             password: null,
-
             errors:'',
             showProgress:false,
         };
     }
 
-
-
-
-
-    navigateToRegister = ( user ) => {
-        this.props.navigation.navigate('Register',user)
-    }
-
-
-
-
+    //Routing Functions
 
 
 
     navigateToRegister(){
         this.props.navigation.navigate("Register");
+    }
+
+    //Login Functions
+
+    storeToken(responseData){
+        AsyncStorage.setItem("token", responseData, (err)=> {
+            if(err){
+                console.log("an error");
+                throw err;
+            }
+            console.log("success");
+        })
+            .then(this.props.navigation.navigate('MainTab'))
+            .catch((err)=> {
+                console.log("error is: " + err);
+            });
+    }
+
+    async onLoginPressed() {
+        this.setState({showProgress: true})
+        try {
+            let response = await fetch('http://54.162.160.91/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+
+                    email: this.state.email,
+                    password: this.state.password,
+
+                })
+            });
+            let res = await response.json();
+            if (response.status >= 200 && response.status < 300) {
+                //Handle success
+                let accessToken = res.token;
+                console.log(accessToken);
+                //On success we will store the access_token in the AsyncStorage
+                this.storeToken(accessToken);
+
+            } else {
+
+                let error = res;
+                throw error;
+            }
+        } catch(error) {
+            this.setState({error: error});
+            console.log("error " + error);
+            this.setState({showProgress: false});
+        }
     }
 
 
@@ -77,7 +116,7 @@ export default class Login extends Component {
                                autoCorrect={ false }
                                autoCapitalize='none'
                                keyboardType='email-address'
-                               onSubmitEditing={ () => this.passwordInput.focus() }
+                               onSubmitEditing={ () => this.password.focus() }
                                returnKeyType='next'/>
                     <Text>{this.state.email}</Text>
                     <View style={styles.hairline}/>
@@ -89,12 +128,12 @@ export default class Login extends Component {
                                value={ this.state.password }
                                secureTextEntry={ true }
                                autoCorrect={ false }
-                               returnKeyType='next'/>
+                               />
                     <View style={styles.hairline}/>
 
                 </View>
                 <Button
-                    onPress={ this._navigateToMain}
+                    onPress={() => this.onLoginPressed()}
                     containerStyle={{padding:20, overflow:'hidden', borderRadius:5, backgroundColor: '#FFC305', marginLeft:25, marginRight:25,}}
                     style={{fontSize: 15, color: 'black', fontWeight:'100', letterSpacing:3 }}>
 
@@ -159,4 +198,8 @@ const styles = StyleSheet.create({
 
     }
 });
+
+
+
+
 
