@@ -1,7 +1,7 @@
 
 
 import React, { PureComponent } from 'react';
-import { Animated, View, Text, StyleSheet } from 'react-native';
+import { Animated, View, Text, StyleSheet, AsyncStorage } from 'react-native';
 import  Icon  from 'react-native-vector-icons/Ionicons'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import Vote from '../MainScreens/Vote'
@@ -31,6 +31,9 @@ export default class TabView extends PureComponent<void, *, State> {
             { key: '3', title: 'Third', icon: 'ios-basketball' },
             { key: '4', title: 'Fourth', icon: 'ios-add-circle' },
         ],
+        loaded:false,
+
+
     };
 
     _handleChangeTab = index => {
@@ -82,14 +85,15 @@ export default class TabView extends PureComponent<void, *, State> {
     };
 
     _renderScene = ({ route }) => {
+
         switch (route.key) {
             case '1':
-                return (
-                    <Vote
-                        state={this.state}
+                return(
+                    <Vote state={this.state}/>
+                )
 
-                    />
-                );
+
+
             case '2':
                 return (
                     <Profile
@@ -119,6 +123,7 @@ export default class TabView extends PureComponent<void, *, State> {
     render() {
         return (
             <TabViewAnimated
+                lazy={true}
                 style={[styles.container, this.props.style]}
                 navigationState={this.state}
                 renderScene={this._renderScene}

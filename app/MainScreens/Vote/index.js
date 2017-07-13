@@ -66,7 +66,8 @@ export default class index extends Component{
                     <Text>메일 : {this.state.user.email}</Text>
                     <Text>이름 : {this.state.user.username}</Text>
                     <Text>비번 : {this.state.user.password}</Text>
-                    <Text>했다 시발</Text>
+                    {/*<Text>했다 시발</Text>*/}
+
 
 
             </View>
