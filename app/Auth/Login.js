@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Button from 'react-native-button';
 
 
-
 import {
     Text,
     TextInput,
@@ -17,46 +16,48 @@ import {
 } from 'react-native';
 
 
-
-
-
 export default class Login extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            error: null,
             email: null,
             password: null,
-            errors:'',
-            showProgress:false,
+            errors: '',
+            showProgress: false,
         };
     }
 
     //Routing Functions
 
+    componentWillReceiveProps() {
+
+        console.log("param"+this.props.navigation);
 
 
-    navigateToRegister(){
-        this.props.navigation.navigate("Register");
+    }
+    navigateToRegister() {
+        this.props.navigation.navigate("Register",{err:""});
     }
 
     //Login Functions
 
-    storeToken(responseData){
-        AsyncStorage.setItem("token", responseData, (err)=> {
-            if(err){
+    storeToken(responseData) {
+        AsyncStorage.setItem("token", responseData, (err) => {
+            if (err) {
                 console.log("an error");
                 throw err;
             }
             console.log("success");
         })
             .then(this.props.navigation.navigate('TabView'))
-            .catch((err)=> {
+            .catch((err) => {
                 console.log("error is: " + err);
             });
     }
 
-    async onLoginPressed  () {
+    async onLoginPressed() {
         this.setState({showProgress: true})
         try {
             let response = await fetch('http://54.162.160.91/api/auth/login', {
@@ -85,34 +86,26 @@ export default class Login extends Component {
                 let error = res;
                 throw error;
             }
-        } catch(error) {
-            this.setState({error: error});
-            console.log("error " + error);
+        } catch (error) {
+            this.setState({error: error.message});
+            console.log(error);
             this.setState({showProgress: false});
         }
     }
 
 
-
-
-
-
-
-
     render() {
 
+        console.log("param"+this.props.navigation);
 
-
-        return(
+        return (
 
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
                 <StatusBar barStyle="dark-content"/>
 
 
-
                 <View style={styles.middle}>
-
                     <Text style={ styles.textHead }>User Email</Text>
                     <TextInput style={ styles.textInput }
                                onChangeText={ (val) => this.setState({email: val}) }
@@ -125,6 +118,10 @@ export default class Login extends Component {
                                onSubmitEditing={ () => this.password.focus() }
                                returnKeyType='next'/>
                     <Text>{this.state.email}</Text>
+                    {/*if(params !=null){*/}
+                    {/*<Text>{params.user}</Text>*/}
+                {/*}*/}
+
                     <View style={styles.hairline}/>
 
 
@@ -135,14 +132,22 @@ export default class Login extends Component {
                                secureTextEntry={ true }
                                autoCorrect={ false }
                                returnKeyType='next'
-                               />
+                    />
                     <View style={styles.hairline}/>
+                    <Text>{this.state.error}</Text>
 
                 </View>
                 <Button
                     onPress={() => this.onLoginPressed()}
-                    containerStyle={{padding:20, overflow:'hidden', borderRadius:5, backgroundColor: '#FFC305', marginLeft:25, marginRight:25,}}
-                    style={{fontSize: 15, color: 'black', fontWeight:'100', letterSpacing:3 }}>
+                    containerStyle={{
+                        padding: 20,
+                        overflow: 'hidden',
+                        borderRadius: 5,
+                        backgroundColor: '#FFC305',
+                        marginLeft: 25,
+                        marginRight: 25,
+                    }}
+                    style={{fontSize: 15, color: 'black', fontWeight: '100', letterSpacing: 3}}>
                     SIGN IN
                 </Button>
 
@@ -153,7 +158,7 @@ export default class Login extends Component {
                 </Button>
                 <Button
 
-                    style={{fontSize: 10, color: 'black', padding:20, letterSpacing:3}}
+                    style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}
                     styleDisabled={{color: 'red'}}>
                     FORGOT YOUR PASSWORD?
                 </Button>
@@ -166,39 +171,39 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    textInput:{
+    textInput: {
         marginTop: 7,
-        height:30,
+        height: 30,
         fontSize: 18,
         textAlign: 'center',
-        paddingBottom:5
+        paddingBottom: 5
     },
-    textHead:{
+    textHead: {
         textAlign: 'center',
         marginTop: 35,
         color: 'black',
     },
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
     },
-    hairline:{
+    hairline: {
         borderBottomColor: '#c1c1c1',
         borderBottomWidth: .5,
-        marginLeft:30,
-        marginRight:30,
-        marginTop:8,
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 8,
     },
-    button:{
-        marginTop:40,
-        backgroundColor:'#FFC305',
+    button: {
+        marginTop: 40,
+        backgroundColor: '#FFC305',
     },
-    logo:{
+    logo: {
         flex: .25,
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    middle:{
+    middle: {
         flex: .35,
         backgroundColor: 'white',
 

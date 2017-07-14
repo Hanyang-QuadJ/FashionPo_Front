@@ -22,14 +22,13 @@ export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error:"",
             email: null,
             username: null,
             password: null,
-            errors:[],
+            errors: [],
         };
     }
-
-
 
     async saveToken(item, selectedValue) {
         try {
@@ -40,9 +39,7 @@ export default class Register extends Component {
     }
 
 
-
-
-    async _userRegister () {
+    async _userRegister() {
         try {
             let response = await fetch("http://54.162.160.91/api/auth/register", {
                 method: "POST",
@@ -62,8 +59,8 @@ export default class Register extends Component {
             let res = await response.text();
 
 
-            if(response.status >= 200 && response.status < 300){
-                console.log("res success is: " +res);
+            if (response.status >= 200 && response.status < 300) {
+                console.log("res success is: " + res);
                 this.props.navigation.navigate("Login")
 
             } else {
@@ -71,8 +68,11 @@ export default class Register extends Component {
                 throw errors;
             }
 
-        } catch (errors){
+        } catch (errors) {
             console.log("castch errors " + errors);
+            this.setState({
+                error: "email exist!"
+            })
 
         }
 
@@ -80,12 +80,12 @@ export default class Register extends Component {
 
     render() {
 
-        return(
+
+        return (
 
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
                 <StatusBar barStyle="dark-content"/>
-
 
 
                 <View style={styles.middle}>
@@ -102,6 +102,7 @@ export default class Register extends Component {
                                onSubmitEditing={ () => this.passwordInput.focus() }
                                returnKeyType='next'/>
                     <Text>{this.state.email}</Text>
+                    <Text>{this.state.error}</Text>
                     <View style={styles.hairline}/>
 
                     <Text style={ styles.textHead }>Username</Text>
@@ -128,8 +129,15 @@ export default class Register extends Component {
                 </View>
                 <Button
                     onPress={this._userRegister.bind(this)}
-                    containerStyle={{padding:20, overflow:'hidden', borderRadius:5, backgroundColor: '#FFC305', marginLeft:25, marginRight:25,}}
-                    style={{fontSize: 15, color: 'black', fontWeight:'100', letterSpacing:3 }}>
+                    containerStyle={{
+                        padding: 20,
+                        overflow: 'hidden',
+                        borderRadius: 5,
+                        backgroundColor: '#FFC305',
+                        marginLeft: 25,
+                        marginRight: 25,
+                    }}
+                    style={{fontSize: 15, color: 'black', fontWeight: '100', letterSpacing: 3}}>
 
                     SIGN UP
                 </Button>
@@ -143,39 +151,39 @@ export default class Register extends Component {
 }
 
 const styles = StyleSheet.create({
-    textInput:{
+    textInput: {
         marginTop: 7,
-        height:30,
+        height: 30,
         fontSize: 18,
         textAlign: 'center',
-        paddingBottom:5
+        paddingBottom: 5
     },
-    textHead:{
+    textHead: {
         textAlign: 'center',
         marginTop: 35,
         color: 'black',
     },
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
     },
-    hairline:{
+    hairline: {
         borderBottomColor: '#c1c1c1',
         borderBottomWidth: .5,
-        marginLeft:30,
-        marginRight:30,
-        marginTop:8,
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop: 8,
     },
-    button:{
+    button: {
 
-        backgroundColor:'#FFC305',
+        backgroundColor: '#FFC305',
     },
-    logo:{
+    logo: {
         flex: .25,
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    middle:{
+    middle: {
         flex: .35,
         backgroundColor: 'white',
 
