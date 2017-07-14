@@ -17,7 +17,7 @@ import {
 
 let STORAGE_KEY = 'id_token';
 
-export default class register extends Component {
+export default class Register extends Component {
 
     constructor(props) {
         super(props);

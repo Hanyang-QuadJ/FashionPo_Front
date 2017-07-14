@@ -147,7 +147,7 @@ export default class Login extends Component {
                 </Button>
 
                 <Button
-                    onPress={this.navigateToRegister}
+                    onPress={() => this.navigateToRegister()}
                     style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}>
                     SIGN UP
                 </Button>

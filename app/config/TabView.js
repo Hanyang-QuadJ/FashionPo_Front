@@ -1,7 +1,7 @@
 
 
 import React, { PureComponent } from 'react';
-import { Animated, View, Text, StyleSheet, AsyncStorage } from 'react-native';
+import { Animated, View, Text, StyleSheet, AsyncStorage,TouchableWithoutFeedback } from 'react-native';
 import  Icon  from 'react-native-vector-icons/Ionicons'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import Vote from '../MainScreens/Vote'
@@ -11,30 +11,37 @@ import Rank from '../MainScreens/Rank'
 
 import type { NavigationState } from 'react-native-tab-view/types';
 
+const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+
 type Route = {
     key: string,
     title: string,
     icon: string,
+    username: string
 };
 
 type State = NavigationState<Route>;
 
-export default class TabView extends PureComponent<void, *, State> {
-    static title = 'Bottom bar with indicator';
-    static appbarElevation = 4;
+
+export default class Main extends PureComponent<void, *, State> {
+    static title = 'No animation';
+    static backgroundColor = '#f47857';
+
+
+
 
     state: State = {
         index: 0,
         routes: [
-            { key: '1', title: 'First', icon: 'ios-speedometer' },
-            { key: '2', title: 'Second', icon: 'ios-game-controller-b' },
-            { key: '3', title: 'Third', icon: 'ios-basketball' },
-            { key: '4', title: 'Fourth', icon: 'ios-add-circle' },
+            { key: '1',  icon: 'ios-trophy'},
+            { key: '2',  icon: 'ios-person'},
+            { key: '3',  icon: 'ios-camera' },
+            { key: '4',  icon: 'ios-eye',},
+
         ],
-        loaded:false,
-
-
+        loaded:true,
     };
+
 
     _handleChangeTab = index => {
         this.setState({
@@ -42,58 +49,68 @@ export default class TabView extends PureComponent<void, *, State> {
         });
     };
 
-    _renderIndicator = props => {
-        const { width, position } = props;
 
-        const translateX = Animated.multiply(position, width);
 
+    _renderIcon = ({ navigationState, position }) => ({
+                                                          route,
+                                                          index,
+                                                      }: { route: Route, index: number }) => {
+        const inputRange = navigationState.routes.map((x, i) => i);
+        const filledOpacity = position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(i => (i === index ? 1 : 0)),
+        });
+        const outlineOpacity = position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(i => (i === index ? 0 : 1)),
+        });
         return (
-            <Animated.View
-                style={[styles.container, { width, transform: [{ translateX }] }]}
-            >
-                <View style={styles.indicator} />
-            </Animated.View>
+            <View>
+                <AnimatedIcon
+                    name={route.icon}
+                    size={30}
+                    style={[styles.icon, { opacity: filledOpacity }]}
+                />
+                <AnimatedIcon
+                    name={route.icon}
+                    size={30}
+                    style={[styles.icon2, styles.outline, { opacity: outlineOpacity }]}
+                />
+            </View>
+
         );
-    };
-
-    _renderIcon = ({ route }) => {
-        return <Icon name={route.icon} size={24} style={styles.icon} />;
-    };
-
-    _renderBadge = ({ route }) => {
-        if (route.key === '2') {
-            return (
-                <View style={styles.badge}>
-                    <Text style={styles.count}>42</Text>
-                </View>
-            );
-        }
-        return null;
     };
 
     _renderFooter = props => {
         return (
-            <TabBar
-                {...props}
-                renderIcon={this._renderIcon}
-                renderBadge={this._renderBadge}
-                renderIndicator={this._renderIndicator}
-                style={styles.tabbar}
-                tabStyle={styles.tab}
-            />
+            <View style={styles.tabbar}>
+                {props.navigationState.routes.map((route, index) => {
+                    return (
+                        <TouchableWithoutFeedback
+                            key={route.key}
+                            onPress={() => props.jumpToIndex(index)}
+                        >
+                            <Animated.View style={styles.tab}>
+                                {this._renderIcon(props)({ route, index })}
+
+                            </Animated.View>
+                        </TouchableWithoutFeedback>
+                    );
+                })}
+            </View>
         );
     };
 
-    _renderScene = ({ route }) => {
 
+    _renderScene = ({ route }) => {
         switch (route.key) {
             case '1':
-                return(
-                    <Vote state={this.state}/>
-                )
+                return (
+                    <Vote
+                        state={this.state}
 
-
-
+                    />
+                );
             case '2':
                 return (
                     <Profile
@@ -115,6 +132,7 @@ export default class TabView extends PureComponent<void, *, State> {
 
                     />
                 );
+
             default:
                 return null;
         }
@@ -122,14 +140,21 @@ export default class TabView extends PureComponent<void, *, State> {
 
     render() {
         return (
+
+
+
             <TabViewAnimated
-                lazy={true}
                 style={[styles.container, this.props.style]}
                 navigationState={this.state}
+                animationEnabled={false}
+                swipeEnabled={false}
                 renderScene={this._renderScene}
                 renderFooter={this._renderFooter}
                 onRequestChangeTab={this._handleChangeTab}
+
             />
+
+
         );
     }
 }
@@ -139,32 +164,36 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tabbar: {
-        backgroundColor: '#222',
+        backgroundColor: '#fafafa',
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     tab: {
-        padding: 0,
+        flex: 1,
+        alignItems: 'center',
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderTopColor: 'rgba(0, 0, 0, .2)',
+        paddingTop: 5,
+
+    },
+
+    icon2: {
+        color: '#959595',
     },
     icon: {
         backgroundColor: 'transparent',
-        color: 'white',
+        position: 'absolute',
+        textAlign: 'center',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        color: '#ff5733',
     },
-    indicator: {
-        flex: 1,
-        backgroundColor: '#0084ff',
-        margin: 4,
-        borderRadius: 2,
-    },
-    badge: {
-        marginTop: 4,
-        marginRight: 32,
-        backgroundColor: '#f44336',
-        height: 24,
-        width: 24,
-        borderRadius: 12,
-        alignItems: 'center',
-        justifyContent: 'center',
-        elevation: 4,
-    },
+
+
+
     count: {
         color: '#fff',
         fontSize: 12,
