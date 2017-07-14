@@ -64,6 +64,7 @@ export default class Register extends Component {
 
             if(response.status >= 200 && response.status < 300){
                 console.log("res success is: " +res);
+                this.props.navigation.navigate("Login")
 
             } else {
                 let errors = res;
@@ -72,19 +73,6 @@ export default class Register extends Component {
 
         } catch (errors){
             console.log("castch errors " + errors);
-
-            let formErrors = JSON.parse(errors);
-            //We will store all the errors in the array.
-            let errorsArray = [];
-            for(var key in formErrors) {
-                //If array is bigger than one we need to split it.
-                if(formErrors[key].length > 1) {
-                    formErrors[key].map(error => errorsArray.push(`${key} ${error}`));
-                } else {
-                    errorsArray.push(`${key} ${formErrors[key]}`);
-                }
-            }
-
 
         }
 
