@@ -134,9 +134,6 @@ const styles = StyleSheet.create({
 
 
 
-<<<<<<< HEAD
 });
 
-=======
-});
->>>>>>> e28a72c3e8bf1a088264f538cd198fa2ca91755e
+
