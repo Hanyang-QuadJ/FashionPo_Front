@@ -71,6 +71,7 @@ export default class index extends Component{
                 <Text>{this.state.randomPost._id}</Text>
 
 
+
             </View>
 
 
