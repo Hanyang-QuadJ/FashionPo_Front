@@ -44,7 +44,7 @@ export default class index extends Component{
 
 
                     this.setState({
-                        randomPost:responseData
+                        randomPost:responseData.randomPost
                     });
                     console.log(this.state.randomPost)
 
@@ -69,6 +69,7 @@ export default class index extends Component{
 
             <View style={styles.container}>
                 <Text>{this.state.randomPost._id}</Text>
+
 
 
             </View>
