@@ -44,9 +44,9 @@ export default class index extends Component{
 
 
                     this.setState({
-                        randomPost:responseData
+                        randomPost:responseData.randomPost
                     });
-                    console.log(this.state.randomPost)
+                 
 
 
 
