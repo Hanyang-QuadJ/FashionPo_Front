@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react'
 
 
@@ -130,10 +129,14 @@ const styles = StyleSheet.create({
         flex: 1,
 
         justifyContent:'center',
-       alignItems:'center',
+        alignItems:'center',
     },
 
 
 
+<<<<<<< HEAD
 });
 
+=======
+});
+>>>>>>> e28a72c3e8bf1a088264f538cd198fa2ca91755e
