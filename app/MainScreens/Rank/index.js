@@ -44,7 +44,7 @@ export default class index extends Component{
                     this.setState({
                         user: responseData
                     });
-                    console.log("Load");
+                    console.log("Load: " +responseData);
                 })
                 .catch(error => {
                     console.log(error);

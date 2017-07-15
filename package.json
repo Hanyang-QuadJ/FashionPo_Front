@@ -9,7 +9,9 @@
   "dependencies": {
     "react": "16.0.0-alpha.12",
     "react-native": "0.46.1",
+    "react-native-aws3": "0.0.8",
     "react-native-button": "^2.0.0",
+    "react-native-camera": "github:lwansbrough/react-native-camera",
     "react-native-tab-view": "0.0.67",
     "react-native-vector-icons": "^4.2.0",
     "react-navigation": "^1.0.0-beta.11",

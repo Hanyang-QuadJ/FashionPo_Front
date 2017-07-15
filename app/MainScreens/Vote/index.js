@@ -25,13 +25,13 @@ export default class index extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            user: ""
+            randomPost:"",
         };
     }
 
     componentDidMount() {
         AsyncStorage.getItem("token").then((value) => {
-            fetch('http://54.162.160.91/api/user/authed', {
+            fetch('http://54.162.160.91/api/post/random', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,9 +41,16 @@ export default class index extends Component{
             })
                 .then((response) => response.json())
                 .then(responseData => {
+
+
                     this.setState({
-                        user: responseData.user[0]
+                        randomPost:responseData
                     });
+                    console.log(this.state.randomPost)
+
+
+
+
                 })
                 .catch(error => {
                     console.log(error);
@@ -55,19 +62,13 @@ export default class index extends Component{
 
 
 
-
     render(){
 
 
-
         return(
+
             <View style={styles.container}>
-
-                    <Text>메일 : {this.state.user.email}</Text>
-                    <Text>이름 : {this.state.user.username}</Text>
-                    <Text>비번 : {this.state.user.password}</Text>
-                    {/*<Text>했다 시발</Text>*/}
-
+                <Text>{this.state.randomPost._id}</Text>
 
 
             </View>
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1,
 
         justifyContent:'center',
-        alignItems:'center',
+       alignItems:'center',
     },
 
 
