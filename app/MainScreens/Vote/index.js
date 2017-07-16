@@ -48,9 +48,11 @@ export default class index extends Component {
             })
                 .then((response) => response.json())
                 .then(responseData => {
+                    console.log("!!!!");
+                    console.log(responseData);
                     this.setState({
                         fired:true,
-                        msg:responseData
+                        msg:responseData.message
                     });
                     console.log(responseData);
                 })
@@ -100,7 +102,7 @@ export default class index extends Component {
         let button = null;
         if (this.state.fired === false) {
             button = <Button
-                onPress={() => this.pressFireButton(this.state.randomPost.post_id, this.state.randomPost.writtenBy)}
+                onPress={() => this.pressFireButton(this.state.randomPost._id, this.state.randomPost.writtenBy)}
                 style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}>
                 Fire!
             </Button>
