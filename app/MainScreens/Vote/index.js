@@ -66,7 +66,7 @@ export default class index extends Component {
 
 
     componentDidMount() {
-        alert("!");
+
         AsyncStorage.getItem("token").then((value) => {
             fetch('http://54.162.160.91/api/post/random', {
                 method: 'GET',
@@ -114,9 +114,9 @@ export default class index extends Component {
         return (
 
             <View style={styles.container}>
-                <Text>{this.state.randomPost._id}</Text>
+                {/*<Text>{this.state.randomPost._id}</Text>*/}
 
-                {button}
+                {/*{button}*/}
             </View>
 
 
