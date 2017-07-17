@@ -28,8 +28,8 @@ export default class index extends Component {
     }
 
     async pressFireButton(post_id, written_by) {
-        console.log("post : "+post_id);
-        console.log("wrttenBy : "+written_by);
+        console.log("post : " + post_id);
+        console.log("writtenBy : " + written_by);
 
         AsyncStorage.getItem("token").then((value) => {
             fetch('http://54.162.160.91/api/post/fire', {
@@ -51,10 +51,35 @@ export default class index extends Component {
                     console.log("!!!!");
                     console.log(responseData);
                     this.setState({
-                        fired:true,
-                        msg:responseData.message
+                        fired: true,
+                        msg: responseData.message
                     });
                     console.log(responseData);
+                    AsyncStorage.getItem("token").then((value) => {
+                        fetch('http://54.162.160.91/api/post/random', {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                'x-access-token': value
+                            },
+
+                        })
+                            .then((response) => response.json())
+                            .then(responseData => {
+
+                                console.log("!!!");
+                                console.log(responseData.message);
+                                this.setState({
+                                    randomPost: responseData.message
+                                });
+
+
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            })
+                    })
                 })
                 .catch(error => {
                     console.log(error);
@@ -86,7 +111,6 @@ export default class index extends Component {
                     });
 
 
-
                 })
                 .catch(error => {
                     console.log(error);
@@ -99,29 +123,26 @@ export default class index extends Component {
 
     render() {
 
+        let url = this.state.randomPost.picURL;
+        if (url === undefined) url = '!';
         let button = null;
-        if (this.state.fired === false) {
-            button = <Button
-                onPress={() => this.pressFireButton(this.state.randomPost._id, this.state.randomPost.writtenBy)}
-                style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}>
-                Fire!
-            </Button>
-        }
-        else {
 
-            button = <Text>{this.state.msg}</Text>
-        }
+        button = <Button
+            onPress={() => this.pressFireButton(this.state.randomPost._id, this.state.randomPost.writtenBy)}
+            style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}>
+            Fire!
+        </Button>
+        console.log(this.state.randomPost);
         return (
 
             <View style={styles.container}>
-                {/*<Text>{this.state.randomPost._id}</Text>*/}
-
-                {/*{button}*/}
+                <Text>{this.state.randomPost._id}</Text>
+                <Image
+                    style={{width: 300, height: 300}}
+                    source={{uri: url}}
+                />
+                {button}
             </View>
-
-
-
-
 
         );
     }
@@ -130,12 +151,9 @@ export default class index extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-
 });
 
 
