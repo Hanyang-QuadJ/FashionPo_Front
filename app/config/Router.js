@@ -58,7 +58,8 @@ export const AuthStack = StackNavigator({
 
         }
 
-    }
+    },
+
 
 
 });
