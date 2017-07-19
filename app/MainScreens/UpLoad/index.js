@@ -11,7 +11,11 @@ import {
     TouchableOpacity,
 
 
+
 } from 'react-native'
+import SwipeCards from './Components/SwipeCards'
+
+
 
 
 
@@ -26,8 +30,7 @@ export default class index extends Component{
 
         return(
             <View style={styles.container}>
-                <Text>Upload Page</Text>
-
+                <SwipeCards style={{flex: 1}}  />
             </View>
 
 
