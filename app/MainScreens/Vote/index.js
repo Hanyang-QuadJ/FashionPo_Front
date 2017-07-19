@@ -32,18 +32,32 @@ export default class index extends Component {
             msg: "",
             blur: 0,
             url: "https://s3.amazonaws.com/fashionpoimagebucket/test.png",
-            preFetch: false
+            preFetch: false,
+            urls:[
+                "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpeg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/resizeasdf.jpeg"
+            ],
+            indexPic: 0
         };
-        Image.prefetch("https://s3.amazonaws.com/fashionpoimagebucket/resize.jpg").then(() => {
-            this.setState({
-                loaded: true
-            })
-        })
-
-
-
 
     }
+
+
+    componentDidMount() {
+        Image.prefetch(this.state.urls[0])
+            .then(Image.prefetch(this.state.urls[1]))
+            .then(Image.prefetch(this.state.urls[2]))
+            .then(this.setState({loaded : true}))
+            .then(console.log("!!!!!!!!loaded!!!!!!!!"));
+    }
+
+
+
+
+
+
+
 
     makeBlur(url) {
         if (this.state.blur === 15) this.setState({blur : 0});
@@ -53,61 +67,61 @@ export default class index extends Component {
     async pressFireButton(post_id, written_by) {
         console.log("post : " + post_id);
         console.log("writtenBy : " + written_by);
-
-        AsyncStorage.getItem("token").then((value) => {
-            fetch('http://54.162.160.91/api/post/fire', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'x-access-token': value
-                },
-                body: JSON.stringify({
-
-                    post_id: post_id,
-                    writtenBy: written_by
-
-                })
-            })
-                .then((response) => response.json())
-                .then(responseData => {
-                    console.log("!!!!");
-                    console.log(responseData);
-                    this.setState({
-                        fired: true,
-                        msg: responseData.message
-                    });
-                    console.log(responseData);
-                    AsyncStorage.getItem("token").then((value) => {
-                        fetch('http://54.162.160.91/api/post/random', {
-                            method: 'GET',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json',
-                                'x-access-token': value
-                            },
-
-                        })
-                            .then((response) => response.json())
-                            .then(responseData => {
-
-                                console.log("!!!");
-                                console.log(responseData.message);
-                                this.setState({
-                                    randomPost: responseData.message
-                                });
-
-
-                            })
-                            .catch(error => {
-                                console.log(error);
-                            })
-                    })
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        })
+        this.setState({indexPic: this.state.indexPic+1});
+        // AsyncStorage.getItem("token").then((value) => {
+        //     fetch('http://54.162.160.91/api/post/fire', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json',
+        //             'x-access-token': value
+        //         },
+        //         body: JSON.stringify({
+        //
+        //             post_id: post_id,
+        //             writtenBy: written_by
+        //
+        //         })
+        //     })
+        //         .then((response) => response.json())
+        //         .then(responseData => {
+        //             console.log("!!!!");
+        //             console.log(responseData);
+        //             this.setState({
+        //                 fired: true,
+        //                 msg: responseData.message
+        //             });
+        //             console.log(responseData);
+        //             AsyncStorage.getItem("token").then((value) => {
+        //                 fetch('http://54.162.160.91/api/post/random', {
+        //                     method: 'GET',
+        //                     headers: {
+        //                         'Accept': 'application/json',
+        //                         'Content-Type': 'application/json',
+        //                         'x-access-token': value
+        //                     },
+        //
+        //                 })
+        //                     .then((response) => response.json())
+        //                     .then(responseData => {
+        //
+        //                         console.log("!!!");
+        //                         console.log(responseData.message);
+        //                         this.setState({
+        //                             randomPost: responseData.message
+        //                         });
+        //
+        //
+        //                     })
+        //                     .catch(error => {
+        //                         console.log(error);
+        //                     })
+        //             })
+        //         })
+        //         .catch(error => {
+        //             console.log(error);
+        //         })
+        // })
 
 
     }
@@ -171,10 +185,13 @@ export default class index extends Component {
             style={{fontSize: 10, color: 'black', padding: 20, letterSpacing: 3}}>
             Fire!
         </Button>
-        console.log("----------------------blur----------------------");
-        console.log(this.state.url);
+        console.log("----------------------url----------------------");
+        console.log(this.state.urls[this.state.indexPic]);
         console.log("------------------------------------------------");
+        const urls = [
 
+
+        ];
 
         return (
 
@@ -196,7 +213,7 @@ export default class index extends Component {
                                 blurRadius={this.state.blur}
                                 style={{width: 300, height: 300}}
                                 source={{
-                                    uri: "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpg",
+                                    uri: this.state.urls[this.state.indexPic],
                                     cache: 'only-if-cached'
                                 }}
                             />
