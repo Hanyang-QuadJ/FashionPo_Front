@@ -18,6 +18,7 @@ import {
 
 import Button from "react-native-button";
 import Icon from 'react-native-vector-icons/Ionicons';
+import SwipeCards from './Components/SwipeCards';
 
 
 
@@ -47,6 +48,7 @@ export default class index extends Component {
             ],
             indexPic: 0
         };
+
 
     }
 
@@ -219,24 +221,25 @@ export default class index extends Component {
 
                 {/*<Text>{this.state.randomPost._id}</Text>*/}
                 {/*<Text>{url}</Text>*/}
-                <TouchableOpacity onPress={() => this.makeBlur(this.state.url)} style={{width: 300, height: 300}}>
+                {/*<TouchableOpacity onPress={() => this.makeBlur(this.state.url)} style={{width: 300, height: 300}}>*/}
                     {
                         this.state.loaded
                             ? (
-                            <Image
-                                blurRadius={this.state.blur}
-                                style={{width: 300, height: 300}}
-                                source={{
-                                    uri: this.state.urls[this.state.indexPic],
-                                    cache: 'only-if-cached'
-                                }}
-                            />
+                        <SwipeCards style={{flex: 1}}  />
+                            // <Image
+                            //     blurRadius={this.state.blur}
+                            //     style={{width: 300, height: 300}}
+                            //     source={{
+                            //         uri: this.state.urls[this.state.indexPic],
+                            //         cache: 'only-if-cached'
+                            //     }}
+                            // />
                         ) : (
                             <Text>Loading images...</Text>
                         )
                     }
 
-                </TouchableOpacity>
+                {/*</TouchableOpacity>*/}
                 {button}
 
             </View>

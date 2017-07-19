@@ -8,8 +8,8 @@ import SwipeCards from 'react-native-swipe-cards';
 let Card = React.createClass({
     render() {
         return (
-            <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
-                <Text>{this.props.text}</Text>
+            <View style={[styles.card]}>
+                <Image style={{width:300,height:300}} source={{uri:this.props.image}}/>
             </View>
         )
     }
@@ -30,12 +30,17 @@ class NoMoreCards extends Component {
 }
 
 const Cards = [
-    {text: 'Tomato', backgroundColor: 'red'},
-    {text: 'Aubergine', backgroundColor: 'purple'},
-    {text: 'Courgette', backgroundColor: 'green'},
-    {text: 'Blueberry', backgroundColor: 'blue'},
-    {text: 'Umm...', backgroundColor: 'cyan'},
-    {text: 'orange', backgroundColor: 'orange'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/1.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/2.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/3.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/4.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/5.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/6.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/7.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/8.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/9.jpg'},
+    {image:'https://s3.amazonaws.com/fashionpoimagebucket/10.jpg'},
+
 ]
 
 export default React.createClass({
