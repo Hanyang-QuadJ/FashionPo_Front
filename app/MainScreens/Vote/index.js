@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
-import SwipeCards from 'react-native-swipe-cards';
-// import RNFetchBlob from 'react-native-fetch-blob';
+
 
 import {
     Text,
@@ -16,6 +15,7 @@ import {
 
 
 } from 'react-native'
+
 import Button from "react-native-button";
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -34,9 +34,16 @@ export default class index extends Component {
             url: "https://s3.amazonaws.com/fashionpoimagebucket/test.png",
             preFetch: false,
             urls:[
-                "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpg",
-                "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpeg",
-                "https://s3.amazonaws.com/fashionpoimagebucket/resizeasdf.jpeg"
+                "https://s3.amazonaws.com/fashionpoimagebucket/1.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/2.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/3.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/4.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/5.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/6.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/7.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/8.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/9.jpg",
+                "https://s3.amazonaws.com/fashionpoimagebucket/10.jpg",
             ],
             indexPic: 0
         };
@@ -48,6 +55,13 @@ export default class index extends Component {
         Image.prefetch(this.state.urls[0])
             .then(Image.prefetch(this.state.urls[1]))
             .then(Image.prefetch(this.state.urls[2]))
+            .then(Image.prefetch(this.state.urls[3]))
+            .then(Image.prefetch(this.state.urls[4]))
+            .then(Image.prefetch(this.state.urls[5]))
+            .then(Image.prefetch(this.state.urls[6]))
+            .then(Image.prefetch(this.state.urls[7]))
+            .then(Image.prefetch(this.state.urls[8]))
+            .then(Image.prefetch(this.state.urls[9]))
             .then(this.setState({loaded : true}))
             .then(console.log("!!!!!!!!loaded!!!!!!!!"));
     }
@@ -59,7 +73,7 @@ export default class index extends Component {
 
 
 
-    makeBlur(url) {
+    makeBlur() {
         if (this.state.blur === 15) this.setState({blur : 0});
         else this.setState({blur : 15});
     }
