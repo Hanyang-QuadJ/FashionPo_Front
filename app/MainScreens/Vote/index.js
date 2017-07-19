@@ -18,7 +18,7 @@ import {
 } from 'react-native'
 import Button from "react-native-button";
 import Icon from 'react-native-vector-icons/Ionicons';
-import FastImage from 'react-native-fast-image'
+
 
 
 export default class index extends Component {
@@ -45,27 +45,10 @@ export default class index extends Component {
 
     }
 
-    async loadImages() {
-        const proms = Image.prefetch("https://s3.amazonaws.com/fashionpoimagebucket/test.png");
-        try {
-            await Promise.all(proms);
-        } catch (e) {
-            Alert.alert('Images could not loaded');
-        }
-    }
-
-    componentWillMount() {
-    }
-
     makeBlur(url) {
-        if (url === "https://s3.amazonaws.com/fashionpoimagebucket/test.png") this.setState({url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMQsPjGTi_09uKhrCtXbF85Y1Ak4DwfhLiIjGzHMkwVllNxX0x"});
-        else this.setState({url: "https://s3.amazonaws.com/fashionpoimagebucket/test.png"})
+        if (this.state.blur === 15) this.setState({blur : 0});
+        else this.setState({blur : 15});
     }
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
-    //     return false;
-    // }
 
     async pressFireButton(post_id, written_by) {
         console.log("post : " + post_id);
@@ -191,24 +174,8 @@ export default class index extends Component {
         console.log("----------------------blur----------------------");
         console.log(this.state.url);
         console.log("------------------------------------------------");
-        // FastImage.preload([
-        //     {
-        //         uri: 'https://facebook.github.io/react/img/logo_og.png',
-        //         headers: { Authorization: 'someAuthToken' },
-        //     },
-        //     {
-        //         uri: 'https://facebook.github.io/react/img/logo_og.png',
-        //         headers: { Authorization: 'someAuthToken' },
-        //     },
-        // ])
-        let imageFuck = <Text></Text>;
-        if (this.state.preFetch === true) {
-            imageFuck = <Image
-                // blurRadius={this.state.blur}
-                style={{width: 300, height: 300}}
-                source={{uri: this.state.url}}
-            />
-        }
+
+
         return (
 
 
@@ -226,10 +193,10 @@ export default class index extends Component {
                         this.state.loaded
                             ? (
                             <Image
+                                blurRadius={this.state.blur}
                                 style={{width: 300, height: 300}}
                                 source={{
                                     uri: "https://s3.amazonaws.com/fashionpoimagebucket/resize.jpg",
-                                    // uri: "https://s3.amazonaws.com/fashionpoimagebucket/test.png",
                                     cache: 'only-if-cached'
                                 }}
                             />
@@ -237,40 +204,10 @@ export default class index extends Component {
                             <Text>Loading images...</Text>
                         )
                     }
-                    {/*<Image*/}
-                    {/*// blurRadius={this.state.blur}*/}
-                    {/*style={{width: 300, height: 300}}*/}
-                    {/*// source={{uri: this.state.url}}*/}
-                    {/*/>*/}
-                    {/*<Image  source={{ uri: this.state.picArray[this.state.id] }}*/}
-                    {/*style={styles.deck} />*/}
-                    {/*<FastImage*/}
-                    {/*style={{width: 300, height: 300}}*/}
-                    {/*source={{*/}
-                    {/*uri: 'https://s3.amazonaws.com/fashionpoimagebucket/test.png',*/}
 
-                    {/*priority: FastImage.priority.normal,*/}
-                    {/*}}*/}
-                    {/*resizeMode={FastImage.resizeMode.contain}*/}
-                    {/*/>*/}
                 </TouchableOpacity>
                 {button}
-                {/*<View style={styles.innerFrame}>*/}
-                {/*<View style={styles.padding}>*/}
 
-                {/*<Text style={styles.userName}>*/}
-                {/*Kendall Jenner*/}
-                {/*</Text>*/}
-
-                {/*<View style={styles.tagsArea}>*/}
-                {/*<Text style={styles.tagsText}>#Valencia</Text>*/}
-                {/*<Text style={styles.tagsText}>#Fashion</Text>*/}
-                {/*<Text style={styles.tagsText}>#Pants</Text>*/}
-                {/*<Text style={styles.tagsText}>#Shoes</Text>*/}
-                {/*<Text style={styles.tagsText}>#Shorts</Text>*/}
-                {/*</View>*/}
-                {/*</View>*/}
-                {/*</View>*/}
             </View>
 
         );
