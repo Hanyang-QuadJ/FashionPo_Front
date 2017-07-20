@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 import {
     Text,
@@ -28,7 +29,11 @@ export default class index extends Component{
         };
     }
 
-    componentWillReceiveProps() {
+    navigateToVote(){
+        this.props.navigation.navigate('Vote')
+    }
+
+    shouldComponentUpdate() {
 
         AsyncStorage.getItem("token").then((value) => {
             fetch('http://54.162.160.91/api/user', {
@@ -45,11 +50,13 @@ export default class index extends Component{
                         user: responseData
                     });
                     console.log("Load: " +responseData);
+                    return true
                 })
                 .catch(error => {
                     console.log(error);
                 })
         })
+
 
 
     }
@@ -95,11 +102,20 @@ export default class index extends Component{
 
         return(
             <View style={styles.container}>
-                <View style={styles.container}>
+                <View style={styles.navbar}>
+                    <TouchableOpacity onPress={()=>this.navigateToVote()}><Icon name="ios-arrow-back" size={24} color="white"/></TouchableOpacity>
+                    <Text style={styles.titleText}>Fashion Po</Text>
+                    <TouchableOpacity><Icon name="ios-camera" size={24} color="white"/></TouchableOpacity>
+                </View>
+                <View style={styles.sub}>
+                    <Text>Rank</Text>
+                </View>
+
                     {users}
 
 
-                </View>
+
+
 
             </View>
 
@@ -114,9 +130,34 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection:'column',
+
+    },
+    navbar: {
+        paddingTop: 20,
+        height: 64,
+        backgroundColor: "#ff5733",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: '#DDDDDD',
+        paddingHorizontal: 12,
+        flexDirection: 'row', // step 1
+        justifyContent: 'space-between', // step 2
+        alignItems: 'center', // step 3
+    },
+    leftText: {
+        color: 'white',
+    },
+    titleText: {
+        fontWeight: '600',
+        color: 'white',
+    },
+    rightText: {
+        color: 'white',
+    },
+    sub:{
+        flex:1,
         justifyContent:'center',
         alignItems:'center',
-    },
+    }
 
 
 

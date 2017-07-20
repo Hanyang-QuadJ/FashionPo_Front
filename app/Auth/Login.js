@@ -51,7 +51,7 @@ export default class Login extends Component {
             }
             console.log("success");
         })
-            .then(this.props.navigation.navigate('TabView'))
+            .then(this.props.navigation.navigate('VoteStack'))
             .catch((err) => {
                 console.log("error is: " + err);
             });

@@ -2,37 +2,63 @@ import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import Login from '../Auth/Login'
+import Rank from '../MainScreens/Rank'
+import UpLoad from '../MainScreens/UpLoad'
+
+import Profile from '../MainScreens/Profile'
 
 
 
 import Register from '../Auth/Register'
 
-import TabView from '../config/TabView'
 import Vote from '../MainScreens/Vote'
-import Rank from '../MainScreens/Rank'
-import UpLoad from '../MainScreens/UpLoad'
-import Profile from '../MainScreens/Profile'
 
-
-
-
-export const MainTab = TabNavigator({
-    Vote: {
-        screen : Vote
-    },
-    Profile:{
-        screen : Profile
+export const TabView = TabNavigator({
+    Rank:{
+        screen: Rank,
+        navigationOptions:{
+            tabBarLabel: 'Rank'
+        }
     },
     UpLoad:{
-        screen: UpLoad
+        screen: UpLoad,
+        navigationOptions:{
+            tabBarLabel: 'Upload'
+        }
+
     },
-    Rank:{
-        screen: Rank
+    Profile:{
+        screen: Profile,
+        navigationOptions:{
+            tabBarLabel: 'Profile'
+        }
     }
-
-
-
 })
+
+
+
+export const VoteStack = StackNavigator({
+
+    TabView: {
+        screen: TabView,
+        navigationOptions:{
+            header: null,
+
+        }
+    },
+    Vote: {
+        screen: Vote,
+        navigationOptions:{
+            title:'null',
+            header:null,
+        }
+
+    },
+
+
+});
+
+
 
 export const AuthStack = StackNavigator({
 
@@ -51,14 +77,16 @@ export const AuthStack = StackNavigator({
         }
 
     },
-    TabView: {
-        screen: TabView,
+    VoteStack: {
+        screen: VoteStack,
         navigationOptions:{
             header: null,
 
         }
 
-    }
+    },
+
+
 
 
 });

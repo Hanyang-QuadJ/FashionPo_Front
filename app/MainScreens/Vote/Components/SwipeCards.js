@@ -4,17 +4,24 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
+import DoubleClick from 'react-native-double-click';
+
 
 let Card = React.createClass({
-
+    getInitialState() {
+        return {
+            blur: 0,
+        }
+    },
 
 
     render() {
 
         return (
-            <View style={[styles.card]}>
-
-                    <Image style={{flex:1 ,width:300,height:300}} source={{uri:this.props.image}} />
+            <View style={styles.card}>
+                <TouchableOpacity onPress={this.makeBlur}>
+                    <Image style={{flex:1 ,width:400,height:400}} source={{uri:this.props.image}} blurRadius={this.state.blur} />
+                </TouchableOpacity>
 
             </View>
         )
@@ -23,13 +30,6 @@ let Card = React.createClass({
 
 
 class NoMoreCards extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            blur: 0,
-        };
-    }
-
 
     render() {
         return (
@@ -41,6 +41,7 @@ class NoMoreCards extends Component {
 }
 
 const Cards = [
+
     {image:'https://s3.amazonaws.com/fashionpoimagebucket/1.jpg'},
     {image:'https://s3.amazonaws.com/fashionpoimagebucket/2.jpg'},
     {image:'https://s3.amazonaws.com/fashionpoimagebucket/3.jpg'},
@@ -59,12 +60,12 @@ export default React.createClass({
 
     getInitialState() {
         return {
-            cards: Cards
+            cards: Cards,
+
         }
     },
     onClickHandler(){
-        alert('시발')
-
+        alert("SEX!")
     },
     handleYup (card) {
         console.log(`Yup for ${card.text}`)
@@ -95,11 +96,12 @@ export default React.createClass({
 
 const styles = StyleSheet.create({
     card: {
+
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 400,
     },
     noMoreCardsText: {
         fontSize: 22,

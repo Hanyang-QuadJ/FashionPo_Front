@@ -80,10 +80,10 @@ export default class index extends Component {
         else this.setState({blur : 15});
     }
 
-    async pressFireButton(post_id, written_by) {
-        console.log("post : " + post_id);
-        console.log("writtenBy : " + written_by);
-        this.setState({indexPic: this.state.indexPic+1});
+    // async pressFireButton(post_id, written_by) {
+    //     console.log("post : " + post_id);
+    //     console.log("writtenBy : " + written_by);
+    //     this.setState({indexPic: this.state.indexPic+1});
         // AsyncStorage.getItem("token").then((value) => {
         //     fetch('http://54.162.160.91/api/post/fire', {
         //         method: 'POST',
@@ -140,7 +140,7 @@ export default class index extends Component {
         // })
 
 
-    }
+    // }
 
 
     // componentDidMount() {
@@ -240,7 +240,7 @@ export default class index extends Component {
                     }
 
                 {/*</TouchableOpacity>*/}
-                {button}
+
 
             </View>
 

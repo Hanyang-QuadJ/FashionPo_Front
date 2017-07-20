@@ -24,6 +24,10 @@ type State = NavigationState<Route>;
 
 
 export default class Main extends PureComponent<void, *, State> {
+    constructor(props){
+        super(props)
+
+    }
     static title = 'No animation';
     static backgroundColor = '#f47857';
 
@@ -34,9 +38,8 @@ export default class Main extends PureComponent<void, *, State> {
         index: 0,
         routes: [
             { key: '1',  icon: 'ios-trophy'},
-            { key: '2',  icon: 'ios-person'},
-            { key: '3',  icon: 'ios-camera' },
-            { key: '4',  icon: 'ios-eye',},
+            { key: '2',  icon: 'ios-camera'},
+            { key: '3',  icon: 'ios-eye' },
 
         ],
         loaded:true,
@@ -106,7 +109,7 @@ export default class Main extends PureComponent<void, *, State> {
         switch (route.key) {
             case '1':
                 return (
-                    <Vote
+                    <Rank
                         state={this.state}
 
                     />
@@ -125,13 +128,7 @@ export default class Main extends PureComponent<void, *, State> {
 
                     />
                 );
-            case '4':
-                return (
-                    <Rank
-                        state={this.state}
 
-                    />
-                );
 
             default:
                 return null;
@@ -145,6 +142,7 @@ export default class Main extends PureComponent<void, *, State> {
 
             <TabViewAnimated
                 style={[styles.container, this.props.style]}
+                lazy={true}
                 navigationState={this.state}
                 animationEnabled={false}
                 swipeEnabled={false}
