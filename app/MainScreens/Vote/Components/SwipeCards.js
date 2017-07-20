@@ -1,24 +1,35 @@
 'use strict';
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
 
 let Card = React.createClass({
+
+
+
     render() {
+
         return (
             <View style={[styles.card]}>
-                <Image style={{width:300,height:300}} source={{uri:this.props.image}}/>
+
+                    <Image style={{width:300,height:300}} source={{uri:this.props.image}} />
+
             </View>
         )
     }
 })
 
+
 class NoMoreCards extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            blur: 0,
+        };
     }
+
 
     render() {
         return (
@@ -44,10 +55,16 @@ const Cards = [
 ]
 
 export default React.createClass({
+
+
     getInitialState() {
         return {
             cards: Cards
         }
+    },
+    onClickHandler(){
+        alert('!!!')
+
     },
     handleYup (card) {
         console.log(`Yup for ${card.text}`)
@@ -64,10 +81,9 @@ export default React.createClass({
         return (
             <SwipeCards
                 cards={this.state.cards}
-
+                onClickHandler={this.onClickHandler}
                 renderCard={(cardData) => <Card {...cardData} />}
                 renderNoMoreCards={() => <NoMoreCards />}
-
                 handleYup={this.handleYup}
                 handleNope={this.handleNope}
                 handleMaybe={this.handleMaybe}
