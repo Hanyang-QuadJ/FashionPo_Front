@@ -63,7 +63,7 @@ export default React.createClass({
         }
     },
     onClickHandler(){
-        console.log('click')
+        alert('시발')
 
     },
     handleYup (card) {
