@@ -14,7 +14,7 @@ let Card = React.createClass({
         return (
             <View style={[styles.card]}>
 
-                    <Image style={{width:300,height:300}} source={{uri:this.props.image}} />
+                    <Image style={{flex:1 ,width:300,height:300}} source={{uri:this.props.image}} />
 
             </View>
         )
@@ -63,7 +63,7 @@ export default React.createClass({
         }
     },
     onClickHandler(){
-        alert('!!!')
+        console.log('click')
 
     },
     handleYup (card) {
