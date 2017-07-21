@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import { Animated, View, Text, StyleSheet, AsyncStorage,TouchableWithoutFeedback } from 'react-native';
 import  Icon  from 'react-native-vector-icons/Ionicons'
+import Icon2 from 'react-native-vector-icons/SimpleLineIcons'
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import Vote from '../MainScreens/Vote'
 import Profile from '../MainScreens/Profile'
@@ -10,6 +11,7 @@ import UpLoad from '../MainScreens/UpLoad'
 import Rank from '../MainScreens/Rank'
 
 import type { NavigationState } from 'react-native-tab-view/types';
+import Button from "react-native-button";
 
 const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 
@@ -24,10 +26,7 @@ type State = NavigationState<Route>;
 
 
 export default class Main extends PureComponent<void, *, State> {
-    constructor(props){
-        super(props)
 
-    }
     static title = 'No animation';
     static backgroundColor = '#f47857';
 
@@ -42,8 +41,11 @@ export default class Main extends PureComponent<void, *, State> {
             { key: '3',  icon: 'ios-eye' },
 
         ],
-        loaded:true,
+
+        loaded:false,
     };
+
+
 
 
     _handleChangeTab = index => {
@@ -106,18 +108,21 @@ export default class Main extends PureComponent<void, *, State> {
 
 
     _renderScene = ({ route }) => {
+
         switch (route.key) {
             case '1':
                 return (
                     <Rank
+                        navigation={this.props.navigation}
                         state={this.state}
-
                     />
+
                 );
             case '2':
                 return (
                     <Profile
                         state={this.state}
+
 
                     />
                 );
@@ -126,8 +131,10 @@ export default class Main extends PureComponent<void, *, State> {
                     <UpLoad
                         state={this.state}
 
+
                     />
                 );
+
 
 
             default:
@@ -162,7 +169,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     tabbar: {
-        backgroundColor: '#fafafa',
+        backgroundColor: '#fffbf8',
         height: 45,
         flexDirection: 'row',
         justifyContent: 'space-between',

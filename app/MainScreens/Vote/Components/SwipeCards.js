@@ -14,12 +14,22 @@ let Card = React.createClass({
         }
     },
 
+    makeBlur(){
+        if(this.state.blur == 0){
+            this.setState({blur:15})
+        }
+        else{
+            this.setState({blur:0})
+        }
+
+    },
+
 
     render() {
 
         return (
             <View style={styles.card}>
-                <TouchableOpacity onPress={this.makeBlur}>
+                <TouchableOpacity onPress={() => this.makeBlur()}>
                     <Image style={{flex:1 ,width:400,height:400}} source={{uri:this.props.image}} blurRadius={this.state.blur} />
                 </TouchableOpacity>
 
@@ -65,7 +75,7 @@ export default React.createClass({
         }
     },
     onClickHandler(){
-        alert("SEX!")
+        this.makeBlur()
     },
     handleYup (card) {
         console.log(`Yup for ${card.text}`)

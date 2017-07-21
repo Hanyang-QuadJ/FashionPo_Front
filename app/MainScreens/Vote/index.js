@@ -214,9 +214,9 @@ export default class index extends Component {
 
             <View style={styles.container}>
                 <View style={styles.navbar}>
-                    <TouchableOpacity><Icon name="ios-camera" size={24} color="white"/></TouchableOpacity>
+                    <TouchableOpacity><Icon name="ios-camera" size={24} color="#ff5733"/></TouchableOpacity>
                     <Text style={styles.titleText}>Fashion Po</Text>
-                    <TouchableOpacity><Icon name="md-arrow-round-forward" size={24} color="white"/></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this.props.navigation.goBack()}><Icon name="md-arrow-round-forward" size={24} color="#ff5733"/></TouchableOpacity>
                 </View>
 
                 {/*<Text>{this.state.randomPost._id}</Text>*/}
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     navbar: {
         paddingTop: 20,
         height: 64,
-        backgroundColor: "#ff5733",
+        backgroundColor: "#fffbf8",
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomColor: '#DDDDDD',
         paddingHorizontal: 12,
@@ -268,14 +268,14 @@ const styles = StyleSheet.create({
         alignItems: 'center', // step 3
     },
     leftText: {
-        color: 'white',
+        color: '#ff5733',
     },
     titleText: {
-        fontWeight: '600',
-        color: 'white',
+        fontWeight: '800',
+        color: '#ff5733',
     },
     rightText: {
-        color: 'white',
+        color: '#ff5733',
     },
     pictureArea: {
         flex: 1,
