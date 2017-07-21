@@ -215,6 +215,7 @@ export default class index extends Component{
                 <View style={styles.secondRank}>
 
                     <View style={styles.rankNumberArea}>
+
                         <Text style={styles.rankNumber}>
                             2
                         </Text>
@@ -284,7 +285,7 @@ const styles = StyleSheet.create({
     },
     navbar: {
         paddingTop: 20,
-        
+
         height: 64,
         backgroundColor: "#fffbf8",
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -358,16 +359,19 @@ const styles = StyleSheet.create({
         flex:1,
         padding:10,
         backgroundColor:"#fff0f0",
-        marginTop:15,
-        marginBottom:15,
+        marginTop:20,
+        marginBottom:20,
         alignItems:'flex-end',
-        justifyContent:'center'
+        justifyContent:'center',
+
 
     },
     rankNumber:{
+
         color:"#ff5733",
         fontWeight:'800',
-        fontSize:20
+        fontSize:20,
+
 
 
     },
