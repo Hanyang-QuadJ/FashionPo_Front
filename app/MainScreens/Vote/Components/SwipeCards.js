@@ -34,14 +34,19 @@ let Card = React.createClass({
     },
 
     render() {
+        console.log(this.props.picURL);
         // this.setState({blur:0});
+        let tags = [];
+        for (let i = 0; i < this.props.tags.length; i++) {
+            tag.push(<Text style={styles.tag}>this.props.tag</Text>);
+        }
         return (
             <View style={styles.card}>
                 <TouchableOpacity onPress={() => this.makeBlur()}>
                     {
                         this.state.blur === 0
                             ? (
-                            <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.image}}
+                            <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.picURL}}
                                    blurRadius={this.state.blur}>
                             </Image>
                             // <Image
@@ -53,9 +58,9 @@ let Card = React.createClass({
                             //     }}
                             // />
                         ) : (
-                            <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.image}}
+                            <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.picURL}}
                                    blurRadius={this.state.blur}>
-                                <Text style={styles.tag}>Tag Here Tag Here Tag Here</Text>
+                                {tags}
                             </Image>
                         )
                     }
@@ -100,44 +105,52 @@ export default React.createClass({
 
     getInitialState() {
         return {
-            cards: Cards,
+            cards: [],
             loaded: false,
-            posts: 0,
+
         }
     },
 
     componentDidMount(){
 
-        // AsyncStorage.getItem("token")
-        //
-        //     .then(
-        //         (response) => {
-        //
-        //             fetch('https://facebook.github.io/react-native/movies.json',{
-        //                 method: 'post',
-        //                 headers: {
-        //                     'Accept': 'application/json',
-        //                     'Content-Type': 'application/json',
-        //                     'x-access-token': response
-        //                 },
-        //             })
-        //
-        //                 .then((response) => response.json())
-        //                 .then((responseJson) => {
-        //                     this.setState({
-        //                         posts: responseJson,
-        //                         loaded: 1
-        //                     });
-        //                 })
-        //                 .catch((error) => {
-        //                     console.error(error);
-        //                 });
-        //
-        //         }
-        //     )
-        //     .catch((err) => {
-        //         console.log("error is: " + err);
-        //     });
+        AsyncStorage.getItem("token")
+
+            .then(
+                (response) => {
+
+                    fetch('http://54.162.160.91/api/post/random', {
+                        method: 'get',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'x-access-token': response
+                        },
+                    })
+
+                        .then((response) => response.json())
+                        .then((responseJson) => {
+                            var tempArray = [];
+                            for (let i = 0; i < 10; i++) {
+                                let prefix = "https://s3.amazonaws.com/fashionpoimagebucket/";
+                                responseJson.message[i].picURL = prefix + responseJson.message[i].picURL;
+                                tempArray.push(responseJson.message[i]);
+                            }
+                            console.log(tempArray);
+                            this.setState({
+
+                                cards: tempArray,
+                                loaded: true
+                            });
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+
+                }
+            )
+            .catch((err) => {
+                console.log("error is: " + err);
+            });
     },
 
     onClickHandler(){
