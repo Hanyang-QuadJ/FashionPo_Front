@@ -32,6 +32,9 @@ let Card = React.createClass({
     componentWillReceiveProps(nextProps){
         this.setState({blur: nextProps.blur});
     },
+    fireWithDoubleClick() {
+        alert('This is awesome \n Double tap succeed');
+    },
 
     render() {
         console.log(this.props.picURL);
@@ -49,14 +52,8 @@ let Card = React.createClass({
                             <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.picURL}}
                                    blurRadius={this.state.blur}>
                             </Image>
-                            // <Image
-                            //     blurRadius={this.state.blur}
-                            //     style={{width: 300, height: 300}}
-                            //     source={{
-                            //         uri: this.state.urls[this.state.indexPic],
-                            //         cache: 'only-if-cached'
-                            //     }}
-                            // />
+
+
                         ) : (
                             <Image style={{flex: 1, width: 400, height: 400}} source={{uri: this.props.picURL}}
                                    blurRadius={this.state.blur}>
@@ -85,20 +82,6 @@ class NoMoreCards extends Component {
     }
 }
 
-const Cards = [
-
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/1.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/2.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/3.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/4.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/5.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/6.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/7.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/8.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/9.jpg', blur: 0},
-    {image: 'https://s3.amazonaws.com/fashionpoimagebucket/10.jpg', blur: 0},
-
-]
 
 export default React.createClass({
 
@@ -157,11 +140,72 @@ export default React.createClass({
         this.makeBlur()
     },
     handleYup (card) {
-
+        // AsyncStorage.getItem("token")
+        //
+        //     .then(
+        //         (response) => {
+        //
+        //             fetch('http://54.162.160.91/api/post/fire', {
+        //                 method: 'post',
+        //                 headers: {
+        //                     'Accept': 'application/json',
+        //                     'Content-Type': 'application/json',
+        //                     'x-access-token': response
+        //                 },
+        //                 body:JSON.stringify({
+        //                     post_id : card._id,
+        //                     writtenBy : card.writtenBy
+        //                 })
+        //             })
+        //
+        //                 .then((response) => response.json())
+        //                 .then((responseJson) => {
+        //                     console.log(responseJson);
+        //                 })
+        //                 .catch((error) => {
+        //                     console.error(error);
+        //                 });
+        //
+        //         }
+        //     )
+        //     .catch((err) => {
+        //         console.log("error is: " + err);
+        //     });
+        console.log(card._id);
+        console.log(card.writtenBy);
 
     },
     handleNope (card) {
+        AsyncStorage.getItem("token")
 
+            .then(
+                (response) => {
+
+                    fetch('http://54.162.160.91/api/post/dislike', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'x-access-token': response
+                        },
+                        body:JSON.stringify({
+                            post_id: card._id,
+                        })
+                    })
+
+                        .then((response) => response.json())
+                        .then((responseJson) => {
+                            console.log(responseJson);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+
+                }
+            )
+            .catch((err) => {
+                console.log("error is: " + err);
+            });
 
     },
     handleMaybe (card) {
@@ -178,7 +222,8 @@ export default React.createClass({
                 // onClickHandler={this.onClickHandler}
                 renderCard={(cardData) => <Card {...cardData}/>}
                 renderNoMoreCards={() => <NoMoreCards />}
-
+                handleYup={this.handleYup}
+                handleNope={this.handleNope}
                 hasMaybeAction
             />
         )
