@@ -71,7 +71,7 @@ export default class index extends Component{
         this.props.navigation.navigate('Vote')
     }
 
-    componentWillReceiveProps() {
+    forceUpdate() {
 
         AsyncStorage.getItem("token").then((value) => {
             fetch('http://54.162.160.91/api/user', {
@@ -164,9 +164,9 @@ export default class index extends Component{
                     <Text style={styles.titleText}>FaPo</Text>
                     <TouchableOpacity onPress={()=>this.searchBar.show()}><Icon name="ios-search" size={24} color="#ff5733"/></TouchableOpacity>
                 </View>
-                <View style={styles.week}>
-                    <Text style={styles.weekText}>Queen Chart</Text>
-                </View>
+                {/*<View style={styles.week}>*/}
+                    {/*<Text style={styles.weekText}>Queen Chart</Text>*/}
+                {/*</View>*/}
                 <View style={styles.firstRank}>
                     <Image source={require('../../Img/vote.png')} style={styles.firstRankImage}/>
                     <Icon name="md-trophy" size={30} style={styles.trophy}/>
@@ -227,6 +227,7 @@ export default class index extends Component{
                             <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
                             <TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>
                         </View>
+                        <TouchableOpacity><Icon name="md-trophy" size={22} style={styles.career}/></TouchableOpacity>
                     </View>
                 </View>
 
@@ -244,6 +245,7 @@ export default class index extends Component{
                             <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
                             <TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>
                         </View>
+
                     </View>
 
                 </View>
@@ -259,7 +261,7 @@ export default class index extends Component{
                         <Text style={styles.rankName}>Jung Hyun Lee</Text>
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
-                            <TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>
+
                         </View>
                     </View>
 
@@ -310,17 +312,10 @@ const styles = StyleSheet.create({
     rightText: {
         color: '#ff5733',
     },
-    week:{
-        flex:0.2,
-        justifyContent:'center',
-        alignItems:'center',
-        padding:7,
 
-
-    },
     weekText:{
         fontWeight:'200',
-        fontSize:16
+        fontSize:18
     },
     firstRank:{
         flex:1.5,
@@ -336,8 +331,8 @@ const styles = StyleSheet.create({
 
     firstRankImage:{
         
-        width:300,
-        height:200,
+        width:315,
+        height:315,
         resizeMode:'contain',
         borderRadius:10
     },
@@ -359,20 +354,17 @@ const styles = StyleSheet.create({
         flex:1,
         padding:10,
         backgroundColor:"#fff0f0",
-        marginTop:20,
-        marginBottom:20,
+        marginTop:23,
+        marginBottom:23,
         alignItems:'flex-end',
         justifyContent:'center',
 
 
     },
     rankNumber:{
-
         color:"#ff5733",
         fontWeight:'800',
         fontSize:20,
-
-
 
     },
 
@@ -401,6 +393,12 @@ const styles = StyleSheet.create({
         paddingLeft:10,
         paddingTop:3,
         color:"#ffc305"
+    },
+    career:{
+        paddingLeft:10,
+        paddingTop:3,
+        color:"#cccccc"
+
     },
     line:{
         borderBottomWidth:StyleSheet.hairlineWidth,

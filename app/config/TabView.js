@@ -13,7 +13,8 @@ import Rank from '../MainScreens/Rank'
 import type { NavigationState } from 'react-native-tab-view/types';
 import Button from "react-native-button";
 
-const AnimatedIcon = Animated.createAnimatedComponent(Icon);
+const AnimatedIcon = Animated.createAnimatedComponent(Icon,Icon2);
+
 
 type Route = {
     key: string,
@@ -36,9 +37,9 @@ export default class Main extends PureComponent<void, *, State> {
     state: State = {
         index: 0,
         routes: [
-            { key: '1',  icon: 'ios-trophy'},
+            { key: '1',  icon: 'ios-eye'},
             { key: '2',  icon: 'ios-camera'},
-            { key: '3',  icon: 'ios-eye' },
+            { key: '3',  icon: 'ios-person'  },
 
         ],
 
@@ -114,14 +115,14 @@ export default class Main extends PureComponent<void, *, State> {
                 return (
                     <Rank
                         navigation={this.props.navigation}
-                        state={this.state}
+
                     />
 
                 );
             case '2':
                 return (
                     <Profile
-                        state={this.state}
+                       
 
 
                     />
@@ -129,7 +130,7 @@ export default class Main extends PureComponent<void, *, State> {
             case '3':
                 return (
                     <UpLoad
-                        state={this.state}
+
 
 
                     />
