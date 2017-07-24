@@ -61,7 +61,7 @@ let Card = React.createClass({
                             </Image>
                         )
                     }
-150/120     120/100
+
 
                 </TouchableOpacity>
 
