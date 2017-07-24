@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity, AsyncStorage} from 'react-native';
 
 import SwipeCards from 'react-native-swipe-cards';
-import DoubleClick from 'react-native-double-click';
+
 
 
 let Card = React.createClass({

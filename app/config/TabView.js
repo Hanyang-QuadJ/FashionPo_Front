@@ -43,7 +43,7 @@ export default class Main extends PureComponent<void, *, State> {
 
         ],
 
-        loaded:false,
+
     };
 
 
@@ -122,14 +122,14 @@ export default class Main extends PureComponent<void, *, State> {
             case '2':
                 return (
                     <Profile
-                       
+
 
 
                     />
                 );
             case '3':
                 return (
-                    <UpLoad
+                    <Profile
 
 
 
@@ -150,7 +150,7 @@ export default class Main extends PureComponent<void, *, State> {
 
             <TabViewAnimated
                 style={[styles.container, this.props.style]}
-                lazy={true}
+                lazy
                 navigationState={this.state}
                 animationEnabled={false}
                 swipeEnabled={false}

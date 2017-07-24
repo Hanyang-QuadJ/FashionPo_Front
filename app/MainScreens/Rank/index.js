@@ -71,7 +71,7 @@ export default class index extends Component{
         this.props.navigation.navigate('Vote')
     }
 
-    forceUpdate() {
+    componentWillReceiveProps() {
 
         AsyncStorage.getItem("token").then((value) => {
             fetch('http://54.162.160.91/api/user', {
@@ -164,20 +164,20 @@ export default class index extends Component{
                     <Text style={styles.titleText}>FaPo</Text>
                     <TouchableOpacity onPress={()=>this.searchBar.show()}><Icon name="ios-search" size={24} color="#ff5733"/></TouchableOpacity>
                 </View>
-                {/*<View style={styles.week}>*/}
-                    {/*<Text style={styles.weekText}>Queen Chart</Text>*/}
-                {/*</View>*/}
+                <View style={styles.week}>
+                    <Text style={styles.weekText}>Queen Chart</Text>
+                </View>
                 <View style={styles.firstRank}>
                     <Image source={require('../../Img/vote.png')} style={styles.firstRankImage}/>
                     <Icon name="md-trophy" size={30} style={styles.trophy}/>
                     <Text style={styles.firstPlaceName}>Kendall Jenner</Text>
                 </View>
                 <View style={styles.buttonArea}>
-                    <View style={{flex:1,alignItems:'flex-end'}}>
+                    <View style={{flex:1,alignItems:'center'}}>
                         <Button
                             containerStyle={{
-                                paddingHorizontal:21,
-                                paddingVertical:10,
+                                paddingHorizontal:25,
+                                paddingVertical:8,
                                 shadowColor:"#cccccc", shadowRadius:3, shadowOpacity:90,
                                 shadowOffset:{width:1, height:2},
                                 borderWidth:StyleSheet.hairlineWidth,
@@ -191,31 +191,29 @@ export default class index extends Component{
                             Follow
                         </Button>
                     </View>
-                    <View style={{flex:1, alignItems:'flex-start'}}>
-                        <Button
-                            containerStyle={{
-                                paddingHorizontal:21,
-                                paddingVertical:10,
-                                shadowColor:"#cccccc", shadowRadius:3, shadowOpacity:90,
-                                shadowOffset:{width:1, height:2},
-                                borderWidth:StyleSheet.hairlineWidth,
-                                borderColor:'#e8e8e8',
-                                borderRadius: 5,
-                                backgroundColor: '#ffffff',
-                                marginLeft:10,
+                    {/*<View style={{flex:1, alignItems:'flex-start'}}>*/}
+                        {/*<Button*/}
+                            {/*containerStyle={{*/}
+                                {/*paddingHorizontal:21,*/}
+                                {/*paddingVertical:10,*/}
+                                {/*shadowColor:"#cccccc", shadowRadius:3, shadowOpacity:90,*/}
+                                {/*shadowOffset:{width:1, height:2},*/}
+                                {/*borderWidth:StyleSheet.hairlineWidth,*/}
+                                {/*borderColor:'#e8e8e8',*/}
+                                {/*borderRadius: 5,*/}
+                                {/*backgroundColor: '#ffffff',*/}
+                                {/*marginLeft:10,*/}
 
-                            }}
-                            style={{fontSize: 12, color: '#ffc305', fontWeight: '900', }}>
-                            Closet
-                        </Button>
-                    </View>
+                            {/*}}*/}
+                            {/*style={{fontSize: 12, color: '#ffc305', fontWeight: '900', }}>*/}
+                            {/*Closet*/}
+                        {/*</Button>*/}
+                    {/*</View>*/}
                 </View>
                 <View style={styles.line}></View>
 
                 <View style={styles.secondRank}>
-
                     <View style={styles.rankNumberArea}>
-
                         <Text style={styles.rankNumber}>
                             2
                         </Text>
@@ -224,14 +222,29 @@ export default class index extends Component{
                     <View style={styles.rankButtonArea}>
                         <Text style={styles.rankName}>Haily Baldwin</Text>
                         <View style={{flexDirection:'row'}}>
-                            <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
-                            <TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>
+                            <Button
+                                containerStyle={{
+                                    paddingHorizontal:17,
+                                    paddingVertical:8,
+                                    shadowColor:"#cccccc", shadowRadius:3, shadowOpacity:90,
+                                    shadowOffset:{width:1, height:2},
+                                    borderWidth:StyleSheet.hairlineWidth,
+                                    borderColor:'#e8e8e8',
+                                    borderRadius: 5,
+                                    backgroundColor: '#ffffff',
+                                    marginRight:10,
+
+                                }}
+                                style={{fontSize: 10, color: '#ffc305', fontWeight: '900', }}>
+                                Follow
+                            </Button>
+                            {/*<TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>*/}
                         </View>
-                        <TouchableOpacity><Icon name="md-trophy" size={22} style={styles.career}/></TouchableOpacity>
                     </View>
                 </View>
 
                 <View style={styles.line}></View>
+
                 <View style={styles.secondRank}>
                     <View style={styles.rankNumberArea}>
                         <Text style={styles.rankNumber}>
@@ -240,16 +253,16 @@ export default class index extends Component{
                     </View>
                     <Image source={require('../../Img/rank4.png')} style={styles.rankImage}/>
                     <View style={styles.rankButtonArea}>
-                        <Text style={styles.rankName}>Ji Woo Yoon</Text>
+                        <Text style={styles.rankName}>Haily Baldwin</Text>
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
-                            <TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>
+                            {/*<TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>*/}
                         </View>
-
                     </View>
-
                 </View>
+
                 <View style={styles.line}></View>
+
                 <View style={styles.secondRank}>
                     <View style={styles.rankNumberArea}>
                         <Text style={styles.rankNumber}>
@@ -258,14 +271,19 @@ export default class index extends Component{
                     </View>
                     <Image source={require('../../Img/rank3.png')} style={styles.rankImage}/>
                     <View style={styles.rankButtonArea}>
-                        <Text style={styles.rankName}>Jung Hyun Lee</Text>
+                        <Text style={styles.rankName}>Haily Baldwin</Text>
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity><Icon name="md-person-add" size={22} style={styles.follow}/></TouchableOpacity>
-
+                            {/*<TouchableOpacity><Icons name="drawer" size={22} style={styles.follow}/></TouchableOpacity>*/}
                         </View>
                     </View>
-
                 </View>
+
+                <View style={styles.line}></View>
+
+
+
+
 
                     {/*{users}*/}
 
@@ -287,7 +305,6 @@ const styles = StyleSheet.create({
     },
     navbar: {
         paddingTop: 20,
-
         height: 64,
         backgroundColor: "#fffbf8",
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -311,6 +328,12 @@ const styles = StyleSheet.create({
     },
     rightText: {
         color: '#ff5733',
+    },
+    week:{
+        padding:7,
+        justifyContent:'center',
+        alignItems:'center',
+
     },
 
     weekText:{
@@ -376,22 +399,22 @@ const styles = StyleSheet.create({
     },
     rankButtonArea:{
        flex:4,
-        paddingTop:5,
-        flexDirection:'column',
-        justifyContent:'center',
+
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
 
     },
     rankName:{
         fontSize:16,
         fontWeight:'400',
         color:"#767676",
-        paddingLeft:10,
-        paddingTop:5,
+        paddingLeft:15,
+
 
     },
     follow:{
-        paddingLeft:10,
-        paddingTop:3,
+        paddingRight:20,
         color:"#ffc305"
     },
     career:{
