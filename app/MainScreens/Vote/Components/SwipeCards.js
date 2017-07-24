@@ -38,7 +38,7 @@ let Card = React.createClass({
 
     render() {
         console.log(this.props.picURL);
-        // this.setState({blur:0});
+        
         let tags = [];
         for (let i = 0; i < this.props.tags.length; i++) {
             tag.push(<Text style={styles.tag}>this.props.tag</Text>);
@@ -113,8 +113,9 @@ export default React.createClass({
                         .then((response) => response.json())
                         .then((responseJson) => {
                             var tempArray = [];
-                            for (let i = 0; i < 10; i++) {
+                            for (let i = 0; i < responseJson.message.length; i++) {
                                 let prefix = "https://s3.amazonaws.com/fashionpoimagebucket/";
+                                console.log(responseJson.message[i]);
                                 responseJson.message[i].picURL = prefix + responseJson.message[i].picURL;
                                 tempArray.push(responseJson.message[i]);
                             }
@@ -140,37 +141,37 @@ export default React.createClass({
         this.makeBlur()
     },
     handleYup (card) {
-        // AsyncStorage.getItem("token")
-        //
-        //     .then(
-        //         (response) => {
-        //
-        //             fetch('http://54.162.160.91/api/post/fire', {
-        //                 method: 'post',
-        //                 headers: {
-        //                     'Accept': 'application/json',
-        //                     'Content-Type': 'application/json',
-        //                     'x-access-token': response
-        //                 },
-        //                 body:JSON.stringify({
-        //                     post_id : card._id,
-        //                     writtenBy : card.writtenBy
-        //                 })
-        //             })
-        //
-        //                 .then((response) => response.json())
-        //                 .then((responseJson) => {
-        //                     console.log(responseJson);
-        //                 })
-        //                 .catch((error) => {
-        //                     console.error(error);
-        //                 });
-        //
-        //         }
-        //     )
-        //     .catch((err) => {
-        //         console.log("error is: " + err);
-        //     });
+        AsyncStorage.getItem("token")
+
+            .then(
+                (response) => {
+
+                    fetch('http://54.162.160.91/api/post/fire', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'x-access-token': response
+                        },
+                        body:JSON.stringify({
+                            post_id : card._id,
+                            writtenBy : card.writtenBy
+                        })
+                    })
+
+                        .then((response) => response.json())
+                        .then((responseJson) => {
+                            console.log(responseJson);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+
+                }
+            )
+            .catch((err) => {
+                console.log("error is: " + err);
+            });
         console.log(card._id);
         console.log(card.writtenBy);
 
