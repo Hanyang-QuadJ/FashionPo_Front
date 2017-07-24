@@ -121,7 +121,7 @@ export default class Main extends PureComponent<void, *, State> {
                 );
             case '2':
                 return (
-                    <Profile
+                    <UpLoad
 
 
 

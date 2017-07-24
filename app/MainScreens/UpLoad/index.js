@@ -13,7 +13,7 @@ import {
 
 
 } from 'react-native'
-import SwipeCards from './Components/SwipeCards'
+
 
 
 
@@ -30,7 +30,7 @@ export default class index extends Component{
 
         return(
             <View style={styles.container}>
-                <SwipeCards style={{flex: 1}}  />
+                <Text>UpLoad</Text>
             </View>
 
 

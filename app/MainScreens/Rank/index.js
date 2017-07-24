@@ -222,9 +222,9 @@ export default class index extends Component {
                     <TouchableOpacity onPress={() => this.searchBar.show()}><Icon name="ios-search" size={24}
                                                                                   color="#ff5733"/></TouchableOpacity>
                 </View>
-                <View style={styles.week}>
-                    <Text style={styles.weekText}>Queen Chart</Text>
-                </View>
+                {/*<View style={styles.week}>*/}
+                    {/*<Text style={styles.weekText}>Queen Chart</Text>*/}
+                {/*</View>*/}
                 <View style={styles.firstRank}>
                     {images[0]}
                     <Icon name="md-trophy" size={30} style={styles.trophy}/>
