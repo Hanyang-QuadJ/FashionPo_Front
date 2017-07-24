@@ -38,7 +38,7 @@ let Card = React.createClass({
 
     render() {
         console.log(this.props.picURL);
-        
+
         let tags = [];
         for (let i = 0; i < this.props.tags.length; i++) {
             tag.push(<Text style={styles.tag}>this.props.tag</Text>);
@@ -61,7 +61,7 @@ let Card = React.createClass({
                             </Image>
                         )
                     }
-
+150/120     120/100
 
                 </TouchableOpacity>
 
